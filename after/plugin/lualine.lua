@@ -10,7 +10,7 @@ lualine.setup({
         theme = "auto",
         component_separators = "",
         section_separators = "",
-        disabled_filetypes = { "packer", "NvimTree", "dashboard" },
+        disabled_filetypes = { "lazy", "NvimTree", "dashboard" },
         globalstatus = true,
     },
 })

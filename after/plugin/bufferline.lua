@@ -1,17 +1,18 @@
-local present, bufferline = pcall(require, "bufferline")
-
-if not present then
-    return
-end
+local status, bufferline = pcall(require, "bufferline")
+if (not status) then return end
 
 bufferline.setup({
-    options = {
-        color_icons = true,
-        diagnostics = "nvim_lsp",
-    },
+  options = {
+    separator_style = '',
+    always_show_bufferline = false,
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+    color_icons = false,
+  },
 })
 
-vim.keymap.set("n", "<Tab>", vim.cmd.BufferLineCycleNext, { noremap = true, silent = true })
-vim.keymap.set("n", "<S-Tab>", vim.cmd.BufferLineCyclePrev, { noremap = true, silent = true })
-vim.keymap.set("n", "\\", vim.cmd.BufferLinePick, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>x", vim.cmd.bd, { noremap = true, silent = true })
+vim.keymap.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>', {})
+vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', {})
+vim.keymap.set('n', '<leader>b', '<cmd>tabedit<CR><cmd>Ex<CR>')
+vim.keymap.set('n', '<leader>kb', '<cmd>BufferLineCloseOthers<CR>')
+vim.keymap.set('n', '<leader>x', '<cmd>bd<CR>')

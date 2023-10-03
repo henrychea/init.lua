@@ -72,13 +72,31 @@ telescope.setup({
     },
 })
 
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
-vim.keymap.set('n', '<leader>fr', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>fo', builtin.oldfiles, {})
-vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {})
+vim.keymap.set('n', ';;', builtin.find_files, {})
+vim.keymap.set('n', ';g', builtin.git_files, {})
+vim.keymap.set('n', ';r', function()
+    builtin.live_grep()
+end)
+vim.keymap.set('n', ';h', builtin.help_tags, {})
+vim.keymap.set('n', ';f',
+    function()
+        builtin.find_files({
+            no_ignore = true,
+            hidden = true
+        })
+    end)
+vim.keymap.set('n', ';d', function()
+    builtin.diagnostics()
+end)
+vim.keymap.set('n', '\\\\', function()
+    builtin.buffers()
+end)
+vim.keymap.set('n', ';o', function()
+    builtin.oldfiles()
+end)
+vim.keymap.set('n', '<leader>th', function()
+    builtin.colorscheme()
+end)
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -89,25 +107,7 @@ require("telescope").load_extension("file_browser")
 
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>fb",
+    "<leader>op",
     ":Telescope file_browser<CR>",
     { noremap = true }
 )
-
-require 'telescope'.load_extension('project')
-
-vim.api.nvim_set_keymap(
-    "n",
-    "<leader>fp",
-    ":lua require('telescope').extensions.project.project{}<CR>",
-    { noremap = true, silent = true }
-)
-
-require 'telescope-tabs'.setup {
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>ft",
-        ":Telescope telescope-tabs list_tabs<CR>",
-        { noremap = true }
-    )
-}
