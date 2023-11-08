@@ -60,12 +60,19 @@ require("mason-lspconfig").setup({
 				on_attach = function(client, bufnr)
 					vim.keymap.set("n", "<leader>to", "<cmd>OrganizeImports<cr>")
 				end,
+				single_file_support = false,
+				root_dir = require("lspconfig.util").root_pattern("package.json"),
 				commands = {
 					OrganizeImports = {
 						organize_imports,
 						description = "TS Organize Imports",
 					},
 				},
+			})
+		end,
+		denols = function()
+			require("lspconfig").denols.setup({
+				root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
 			})
 		end,
 		eslint = function()

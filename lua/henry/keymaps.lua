@@ -55,3 +55,4 @@ vim.keymap.set('n', '<C-w><up>', '<C-w>+')
 vim.keymap.set('n', '<C-w><down>', '<C-w>-')
 
 vim.keymap.set('n', '<leader>ww', '<cmd>SoftWrapMode<CR>')
+vim.keymap.set('n', '<leader>cd', '<cmd>cd %:p:h<CR>')

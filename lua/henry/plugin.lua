@@ -13,7 +13,7 @@ require("lazy").setup({
 	-- Telescope
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.0",
+		tag = "0.1.4",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 
@@ -26,29 +26,75 @@ require("lazy").setup({
 	{ "nvim-telescope/telescope-file-browser.nvim", dependencies = {} },
 
 	-- Monokai Pro
+	-- {
+	-- 	"loctvl842/monokai-pro.nvim",
+	-- 	dependencies = { "MunifTanjim/nui.nvim" },
+	-- 	config = function()
+	-- 		require("monokai-pro").setup({
+	-- 			italic_comments = true,
+	-- 			filter = "pro", -- classic | octagon | pro | machine | ristretto | spectrum
+	-- 			inc_search = "underline", -- underline | background
+	-- 			plugins = {
+	-- 				bufferline = {
+	-- 					underline_selected = false,
+	-- 					underline_visible = false,
+	-- 				},
+	-- 				whichkey = { background_clear = true },
+	-- 				indent_blankline = {
+	-- 					context_highlight = "default", -- default | pro
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 		vim.keymap.set("n", "<leader>tt", "<cmd>MonokaiProSelect<CR>", { noremap = true, silent = true })
+	-- 		vim.cmd([[colorscheme monokai-pro]])
+	-- 	end,
+	-- },
+	-- Poimandres
+	-- {
+	-- 	"olivercederborg/poimandres.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("poimandres").setup({
+	-- 			-- leave this setup function empty for default config
+	-- 			-- or refer to the configuration section
+	-- 			-- for configuration options
+	-- 		})
+	-- 	end,
+	--
+		-- optionally set the colorscheme within lazy config
+		-- init = function()
+		-- 	vim.cmd("colorscheme poimandres")
+		-- end,
+	-- },
+	-- One dark
 	{
-		"loctvl842/monokai-pro.nvim",
-		dependencies = { "MunifTanjim/nui.nvim" },
+		"navarasu/onedark.nvim",
+		lazy = false,
+		priority = 1000,
 		config = function()
-			require("monokai-pro").setup({
-				italic_comments = true,
-				filter = "pro", -- classic | octagon | pro | machine | ristretto | spectrum
-				inc_search = "underline", -- underline | background
-				plugins = {
-					bufferline = {
-						underline_selected = false,
-						underline_visible = false,
-					},
-					whichkey = { background_clear = true },
-					indent_blankline = {
-						context_highlight = "default", -- default | pro
-					},
-				},
+			require("onedark").setup({
+				style = "dark",
 			})
-			vim.keymap.set("n", "<leader>tt", "<cmd>MonokaiProSelect<CR>", { noremap = true, silent = true })
-			vim.cmd([[colorscheme monokai-pro]])
+		end,
+
+		-- optionally set the colorscheme within lazy config
+		init = function()
+			vim.cmd("colorscheme onedark")
 		end,
 	},
+	-- {
+	-- 	"projekt0n/github-nvim-theme",
+	-- 	lazy = false, -- make sure we load this during startup if it is your main colorscheme
+	-- 	priority = 1000, -- make sure to load this before all the other start plugins
+	-- 	config = function()
+	-- 		require("github-theme").setup({
+	-- 			-- ...
+	-- 		})
+	--
+	-- 		vim.cmd("colorscheme github_dark_high_contrast")
+	-- 	end,
+	-- },
 	-- Git icons in sidebar
 	{
 		"lewis6991/gitsigns.nvim",
