@@ -8,6 +8,6 @@
 
 `ln -s $(which nvim) /usr/local/bin`
 
-### Screenshots (Monokai Pro - Ristretto)
+### Screenshots
 
 ![Preview](./preview.png 'Preview')
