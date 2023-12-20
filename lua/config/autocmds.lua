@@ -1,7 +1,7 @@
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-
+-- Autocmds are automatically loaded on the VeryLazy event
+-- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
+-- Add any additional autocmds here
 local Fugitive_Autocmd = vim.api.nvim_create_augroup("Fugitive_Autocmd", {})
-
 local autocmd = vim.api.nvim_create_autocmd
 autocmd("BufWinEnter", {
     group = Fugitive_Autocmd,

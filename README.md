@@ -1,4 +1,4 @@
-# Welcome to my DotFiles, but mainly just Neovim
+# Welcome to my DotFiles, but mainly just Neovim now with LazyNvim
 
 ## Homebrew dependencies
 
@@ -7,7 +7,3 @@
 ## Link Neovim over Vim
 
 `ln -s $(which nvim) /usr/local/bin`
-
-### Screenshots
-
-![Preview](./preview.png 'Preview')
