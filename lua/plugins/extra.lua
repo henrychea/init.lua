@@ -19,13 +19,11 @@ local luaLineOpts = {
 
 return {
   -- Toggleterm
-  "akinsho/toggleterm.nvim",
-  -- Detect tabstop and shiftwidth automatically
-  "tpope/vim-sleuth",
+  { "akinsho/toggleterm.nvim", event = "bufenter" },
   -- Undo history
-  "mbbill/undotree",
+  { "mbbill/undotree" },
   -- Git
-  "tpope/vim-fugitive",
+  { "tpope/vim-fugitive" },
   -- Fuzzy Finder Algorithm which dependencies local dependencies to be built. Only load if `make` is available
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = false },
   -- Configure LSP
