@@ -51,15 +51,4 @@ return {
       section_separators = "",
     },
   },
-  {
-    "folke/tokyonight.nvim",
-    opts = {
-      theme = "night",
-      transparent = true,
-      styles = {
-        sidebars = "transparent",
-        floats = "transparent",
-      },
-    },
-  },
 }
