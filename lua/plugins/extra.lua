@@ -7,15 +7,11 @@ local get_root_dir_node = function(fname)
   local util = require("lspconfig.util")
   return util.root_pattern(".git")(fname) or util.root_pattern("package.json", "tsconfig.json")(fname)
 end
+
 local get_root_dir_deno = function()
   local util = require("lspconfig.util")
   return util.root_pattern("deno.json", "deno.jsonc")
 end
-
-local luaLineOpts = {
-  component_separators = "",
-  section_separators = "",
-}
 
 return {
   -- Toggleterm
@@ -44,11 +40,9 @@ return {
     },
   },
   {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+    "rcarriga/nvim-notify",
     opts = {
-      component_separators = "",
-      section_separators = "",
+      background_colour = "#000000",
     },
   },
 }
