@@ -13,7 +13,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "solarized-osaka",
+      colorscheme = "NeoSolarized",
     },
   },
   {
@@ -32,5 +32,10 @@ return {
     lazy = false,
     priority = 1000,
     opts = {},
+  },
+  {
+    "Tsuzat/NeoSolarized.nvim",
+    lazy = false,
+    priority = 1000,
   },
 }
