@@ -20,6 +20,20 @@ return {
   { "mbbill/undotree" },
   -- Git
   { "tpope/vim-fugitive" },
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      extensions = {
+        fzf = {
+          fuzzy = true, -- false will only do exact matching
+          override_generic_sorter = true, -- override the generic sorter
+          override_file_sorter = true, -- override the file sorter
+          case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+          -- the default case_mode is "smart_case"
+        },
+      },
+    },
+  },
   -- Fuzzy Finder Algorithm which dependencies local dependencies to be built. Only load if `make` is available
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = false },
   -- Configure LSP
