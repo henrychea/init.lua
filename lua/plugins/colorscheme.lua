@@ -1,19 +1,9 @@
 return {
-  -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
-  {
-    "rebelot/kanagawa.nvim",
-    opts = {
-      transparent = true,
-      theme = "dragon",
-    },
-  },
-
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "NeoSolarized",
+      colorscheme = "monokai-pro",
     },
   },
   {
@@ -29,13 +19,23 @@ return {
   },
   {
     "craftzdog/solarized-osaka.nvim",
-    lazy = false,
-    priority = 1000,
     opts = {},
   },
   {
     "Tsuzat/NeoSolarized.nvim",
-    lazy = false,
-    priority = 1000,
+  },
+  {
+    "loctvl842/monokai-pro.nvim",
+    opts = {
+      transparent_background = true,
+    },
+  },
+  { "ellisonleao/gruvbox.nvim" },
+  {
+    "rebelot/kanagawa.nvim",
+    opts = {
+      transparent = true,
+      theme = "dragon",
+    },
   },
 }
