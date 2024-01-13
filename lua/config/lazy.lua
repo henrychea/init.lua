@@ -45,4 +45,4 @@ require("lazy").setup({
   },
 })
 
-require("lua.current-theme")
+require("current-theme")
