@@ -2,9 +2,6 @@ return {
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "monokai-pro",
-    },
   },
   {
     "folke/tokyonight.nvim",
@@ -34,7 +31,7 @@ return {
   {
     "rebelot/kanagawa.nvim",
     opts = {
-      transparent = true,
+      transparent = false,
       theme = "dragon",
     },
   },
