@@ -1,1 +1,1 @@
-vim.cmd("colorscheme kanagawa-lotus")
+vim.cmd("colorscheme monokai-pro-machine")
