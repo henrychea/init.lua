@@ -14,6 +14,7 @@ return {
       },
     },
   },
+  { "catppuccin/nvim" },
   {
     "craftzdog/solarized-osaka.nvim",
     opts = {},
