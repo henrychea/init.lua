@@ -7,3 +7,4 @@ foo.*
 *.log
 data
 *-lock.json
+./lua/current-theme.lua

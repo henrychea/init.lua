@@ -67,14 +67,10 @@ return {
       user_default_options = {
         css = true,
         css_fn = true,
-        tailwind = true,
+        tailwind = "lsp",
+        hsl_fn = true,
+        names = false,
       },
     },
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    opts = function(_, opts)
-      table.insert(opts.sections.lualine_x, 2, require("lazyvim.util").lualine.cmp_source("codeium"))
-    end,
   },
 }
