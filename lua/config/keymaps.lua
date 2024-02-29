@@ -1,6 +1,7 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+local Util = require("lazyvim.util")
 vim.g.mapleader = " "
 
 vim.keymap.set("n", "ge", "$")
@@ -42,8 +43,12 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>cd", "<cmd>cd %:p:h<CR>")
 
 -- Fugitive (Git)
+vim.keymap.set("n", "<leader>gf", vim.cmd.Git, { noremap = true, silent = true, desc = "Open Fugitive" })
 
-vim.keymap.set("n", "<leader>gf", vim.cmd.Git)
+-- Fork (Git UI MacOS)
+vim.keymap.set("n", "<leader>gu", function()
+  Util.terminal({ "fork" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Fork (root dir)" })
 
 -- Toggleterm
 function _G.set_terminal_keymaps()
@@ -59,7 +64,22 @@ end
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
-vim.keymap.set("n", "<leader>tf", "<cmd>ToggleTerm direction=float<CR>")
-vim.keymap.set("n", "<leader>th", "<cmd>ToggleTerm size=10 direction=horizontal<CR>")
-vim.keymap.set("n", "<leader>tv", "<cmd>ToggleTerm size=80 direction=vertical<CR>")
+vim.keymap.set(
+  "n",
+  "<leader>tf",
+  "<cmd>ToggleTerm direction=float<CR>",
+  { noremap = true, silent = true, desc = "Toggle Floating Terminal" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>th",
+  "<cmd>ToggleTerm size=10 direction=horizontal<CR>",
+  { noremap = true, silent = true, desc = "Toggle Horizontal Terminal" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>tv",
+  "<cmd>ToggleTerm size=80 direction=vertical<CR>",
+  { noremap = true, silent = true, desc = "Toggle Vertical Terminal" }
+)
 vim.keymap.set("n", "<leader>xC", ":Telescope themes<CR>", { noremap = true, silent = true, desc = "Theme Switcher" })
