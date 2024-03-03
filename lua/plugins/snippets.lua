@@ -8,6 +8,7 @@ return {
       {
         "rafamadriz/friendly-snippets",
         config = function()
+          require("luasnip.loaders.from_vscode").load({ paths = "~/.config/nvim/snippets" })
           require("luasnip.loaders.from_vscode").lazy_load()
         end,
       },
@@ -23,8 +24,6 @@ return {
             end,
           }
           table.insert(opts.sources, { name = "luasnip" })
-          require("luasnip.loaders.from_vscode").load({ paths = "~/.config/nvim/snippets" })
-          require("luasnip.loaders.from_vscode").lazy_load()
         end,
       },
     },
