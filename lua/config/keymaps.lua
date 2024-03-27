@@ -45,6 +45,14 @@ vim.keymap.set("n", "<leader>cd", "<cmd>cd %:p:h<CR>")
 -- Fugitive (Git)
 vim.keymap.set("n", "<leader>gf", vim.cmd.Git, { noremap = true, silent = true, desc = "Open Fugitive" })
 
+-- UndoTree
+vim.keymap.set(
+  "n",
+  "<leader>uu",
+  "<cmd>UndotreeToggle<CR>",
+  { noremap = true, silent = true, desc = "Toggle UndoTree" }
+)
+
 -- Fork (Git UI MacOS)
 vim.keymap.set("n", "<leader>gu", function()
   Util.terminal({ "fork" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false })
