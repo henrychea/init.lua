@@ -40,6 +40,7 @@ return {
       theme = "dragon",
     },
   },
+  { "projekt0n/github-nvim-theme" },
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
