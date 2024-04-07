@@ -25,11 +25,10 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
--- This is going to get me cancelled
-vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-q>", "<cmd>q<CR>")
 
 vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "q", "<nop>")
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
 vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>")
 
@@ -41,9 +40,6 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "<leader>cd", "<cmd>cd %:p:h<CR>")
-
--- Fugitive (Git)
-vim.keymap.set("n", "<leader>gf", vim.cmd.Git, { noremap = true, silent = true, desc = "Open Fugitive" })
 
 -- UndoTree
 vim.keymap.set(
