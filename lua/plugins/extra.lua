@@ -19,6 +19,11 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "andrew-george/telescope-themes",
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+      config = function()
+        require("telescope").load_extension("fzf")
+      end,
     },
     opts = {
       extensions = {
@@ -32,8 +37,6 @@ return {
       },
     },
   },
-  -- Fuzzy Finder Algorithm which dependencies local dependencies to be built. Only load if `make` is available
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = false },
   -- Configure LSP
   {
     "neovim/nvim-lspconfig",
