@@ -13,8 +13,6 @@ return {
   { "akinsho/toggleterm.nvim", version = "*", config = true },
   -- Undo history
   { "mbbill/undotree" },
-  -- Git
-  { "tpope/vim-fugitive" },
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
