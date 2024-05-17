@@ -87,3 +87,5 @@ vim.keymap.set(
   { noremap = true, silent = true, desc = "Toggle Vertical Terminal" }
 )
 vim.keymap.set("n", "<leader>xC", ":Telescope themes<CR>", { noremap = true, silent = true, desc = "Theme Switcher" })
+
+vim.keymap.set("n", "<leader>cL", ":LspRestart<CR>", { noremap = true, silent = true, desc = "Restart LSP" })
