@@ -2,8 +2,4 @@
 
 ## Homebrew dependencies
 
-`brew install git fd ripgrep stylua neovim tree-sitter`
-
-## Link Neovim over Vim
-
-`ln -s $(which nvim) /usr/local/bin`
+`brew install git fd ripgrep stylua neovim tree-sitter lazygit lazydocker`
