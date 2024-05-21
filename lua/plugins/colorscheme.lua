@@ -11,7 +11,6 @@ return {
   {
     "folke/tokyonight.nvim",
     opts = {
-      theme = "night",
       transparent = true,
     },
   },
@@ -38,6 +37,14 @@ return {
     "loctvl842/monokai-pro.nvim",
     opts = {
       transparent_background = true,
+      background_clear = {
+        "toggleterm",
+        "telescope",
+        "notify",
+        "neo-tree",
+        "nvim-tree",
+        "bufferline",
+      },
     },
   },
   {
