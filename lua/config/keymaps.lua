@@ -89,3 +89,10 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>xC", ":Telescope themes<CR>", { noremap = true, silent = true, desc = "Theme Switcher" })
 
 vim.keymap.set("n", "<leader>cL", ":LspRestart<CR>", { noremap = true, silent = true, desc = "Restart LSP" })
+
+vim.keymap.set(
+  "n",
+  "<leader>ut",
+  ":TransparentToggle<CR>",
+  { noremap = true, silent = true, desc = "Toggle Transparency" }
+)
