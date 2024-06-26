@@ -10,6 +10,16 @@ return {
   { "mbbill/undotree" },
   -- Configure LSP
   {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "stylua",
+        "biome",
+        "rust-analyzer",
+      },
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       -- make sure mason installs the server
@@ -59,18 +69,11 @@ return {
   {
     "nvim-cmp",
     opts = function(_, opts)
-      table.insert(opts.sources, 1, {
+      table.insert(opts.sources, 2, {
         name = "codeium",
         group_index = 2,
         priority = 100,
       })
-    end,
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    opts = function(_, opts)
-      table.insert(opts.sections.lualine_x, 2, LazyVim.lualine.cmp_source("codeium"))
     end,
   },
 }
