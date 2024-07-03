@@ -14,6 +14,7 @@ return {
   {
     "loctvl842/monokai-pro.nvim",
   },
+  { "rose-pine/neovim", name = "rose-pine" },
   {
     "rebelot/kanagawa.nvim",
     opts = {

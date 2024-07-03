@@ -35,4 +35,19 @@ return {
       require("window-picker").setup()
     end,
   },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "andrew-george/telescope-themes",
+    },
+    opts = {
+      extensions = {
+        fzf = {
+          fuzzy = true, -- false will only do exact matching
+        },
+      },
+    },
+  },
+  -- Fuzzy Finder Algorithm which dependencies local dependencies to be built. Only load if `make` is available
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = false },
 }
