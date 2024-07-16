@@ -4,9 +4,8 @@ return {
 		"akinsho/toggleterm.nvim",
 		version = "*",
 		lazy = false,
-		opts = {},
 		config = function()
-			-- Toggleterm
+			-- ToggleTerm settings
 			function _G.set_terminal_keymaps()
 				local opts = { buffer = 0 }
 				vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
@@ -73,7 +72,15 @@ return {
 				"<cmd>lua _lazygit_toggle()<CR>",
 				{ noremap = true, silent = true, desc = "Lazy[G]it" }
 			)
+			require("toggleterm").setup({})
 		end,
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+		-- use opts = {} for passing setup options
+		-- this is equalent to setup({}) function
 	},
 	-- Undo history
 	{
