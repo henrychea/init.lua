@@ -17,7 +17,7 @@ return {
 				{ noremap = true, silent = true, desc = "[C]ode Restart [L]SP" }
 			)
 			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+				group = vim.api.nvim_create_augroup("henry-lsp-attach", { clear = true }),
 				callback = function(event)
 					local map = function(keys, func, desc)
 						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
@@ -124,18 +124,17 @@ return {
 						},
 					},
 				},
-				vtsls = {
-					-- explicitly add default filetypes, so that we can extend
-					-- them in related extras
-					settings = {
-						typescript = {
-							preferences = {
-								importModuleSpecifier = { enabled = "relative" },
-							},
+				tsserver = {
+					init_options = {
+						preferences = {
+							importModuleSpecifierPreference = "non-relative",
 						},
 					},
+					single_file_support = false,
 				},
-
+				denols = {
+					root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
+				},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -152,9 +151,8 @@ return {
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format Lua code
 				"biome",
-				"rust-analyzer",
-				"vtsls",
 			})
+
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
