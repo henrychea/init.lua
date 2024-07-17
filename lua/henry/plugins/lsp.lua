@@ -6,6 +6,18 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{ "j-hui/fidget.nvim", opts = {} },
+			-- make life easy with vtsls
+			{
+				"yioneko/nvim-vtsls",
+				config = function()
+					local map = function(keys, func, desc)
+						vim.keymap.set("n", keys, func, { desc = "LSP: " .. desc })
+					end
+					-- Execute a code action, usually your cursor needs to be on top of an error
+					-- or a suggestion from your LSP for this to activate.
+					map("<leader>cA", "<cmd>VtsExec source_actions<CR>", "Source [C]ode [A]ctions")
+				end,
+			},
 			{ "folke/neodev.nvim", opts = {} },
 		},
 		config = function()
@@ -16,6 +28,7 @@ return {
 				":LspRestart<CR>",
 				{ noremap = true, silent = true, desc = "[C]ode Restart [L]SP" }
 			)
+
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("henry-lsp-attach", { clear = true }),
 				callback = function(event)
@@ -124,13 +137,46 @@ return {
 						},
 					},
 				},
-				tsserver = {
-					init_options = {
-						preferences = {
-							importModuleSpecifierPreference = "non-relative",
+				vtsls = {
+					-- explicitly add default filetypes, so that we can extend
+					-- them in related extras
+					filetypes = {
+						"javascript",
+						"javascriptreact",
+						"javascript.jsx",
+						"typescript",
+						"typescriptreact",
+						"typescript.tsx",
+					},
+					settings = {
+						complete_function_calls = true,
+						vtsls = {
+							enableMoveToFileCodeAction = true,
+							autoUseWorkspaceTsdk = true,
+							experimental = {
+								completion = {
+									enableServerSideFuzzyMatch = true,
+								},
+							},
+						},
+						typescript = {
+							updateImportsOnFileMove = { enabled = "always" },
+							suggest = {
+								completeFunctionCalls = true,
+							},
+							preferences = {
+								importModuleSpecifier = { enabled = "relative" },
+							},
+							inlayHints = {
+								enumMemberValues = { enabled = true },
+								functionLikeReturnTypes = { enabled = true },
+								parameterNames = { enabled = "literals" },
+								parameterTypes = { enabled = true },
+								propertyDeclarationTypes = { enabled = true },
+								variableTypes = { enabled = false },
+							},
 						},
 					},
-					single_file_support = false,
 				},
 				denols = {
 					root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
@@ -164,6 +210,7 @@ return {
 					end,
 				},
 			})
+			require("lspconfig.configs").vtsls = require("vtsls").lspconfig -- set default server config, optional but recommended
 		end,
 	},
 
