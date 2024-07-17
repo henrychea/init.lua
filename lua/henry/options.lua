@@ -39,6 +39,8 @@ vim.opt.inccommand = "split"
 vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+-- Hide cmd line
+vim.opt.cmdheight = 0
 -- Set shell to PowerShell 7 if on Win32 or Win64
 if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
 	vim.opt.fileformat = "unix"
