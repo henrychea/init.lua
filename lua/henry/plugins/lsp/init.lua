@@ -29,6 +29,24 @@ return {
 				{ noremap = true, silent = true, desc = "[C]ode Restart [L]SP" }
 			)
 
+			local getIsFormatEnabledText = function(prefix, buf)
+				if buf then
+					local text = vim.b[buf].disable_autoformat and "Disabled" or "Enabled"
+					return prefix .. " (" .. text .. ")"
+				end
+				local text = vim.g.disable_autoformat and "Disabled" or "Enabled"
+				return prefix .. " (" .. text .. ")"
+			end
+
+			vim.keymap.set("n", "<leader>uF", function()
+				vim.g.disable_autoformat = not vim.g.disable_autoformat
+				vim.print(getIsFormatEnabledText("Global Autoformat is:", nil))
+			end, {
+				noremap = true,
+				silent = true,
+				desc = getIsFormatEnabledText("UI Toggle Global [F]ormat", nil),
+			})
+
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("henry-lsp-attach", { clear = true }),
 				callback = function(event)
@@ -80,6 +98,11 @@ return {
 					--  For example, in C this would take you to the header.
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
+					map("<leader>uf", function()
+						vim.b[event.buf].disable_autoformat = not vim.b[event.buf].disable_autoformat
+						vim.print(getIsFormatEnabledText("Buffer Autoformat is:", event.buf))
+					end, getIsFormatEnabledText("[U]I Disbale Buffer Autoformat", event.buf))
+
 					local client = vim.lsp.get_client_by_id(event.data.client_id)
 					if client and client.server_capabilities.documentHighlightProvider then
 						local highlight_augroup = vim.api.nvim_create_augroup("henry-lsp-highlight", { clear = false })
@@ -100,6 +123,9 @@ return {
 							callback = function(event2)
 								vim.lsp.buf.clear_references()
 								vim.api.nvim_clear_autocmds({ group = "henry-lsp-highlight", buffer = event2.buf })
+								if vim.g.disable_autoformat then
+									vim.g.disable_autoformat = false
+								end
 							end,
 						})
 					end
@@ -136,6 +162,9 @@ return {
 							},
 						},
 					},
+				},
+				eslint = {
+					settings = { format = false },
 				},
 				vtsls = {
 					-- explicitly add default filetypes, so that we can extend
@@ -183,6 +212,7 @@ return {
 				},
 				lua_ls = {
 					settings = {
+						format = false,
 						Lua = {
 							completion = {
 								callSnippet = "Replace",
@@ -197,6 +227,8 @@ return {
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format Lua code
 				"biome",
+				"eslint",
+				"prettier",
 			})
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -213,126 +245,10 @@ return {
 			require("lspconfig.configs").vtsls = require("vtsls").lspconfig -- set default server config, optional but recommended
 		end,
 	},
-
-	{ -- Autoformat
-		"stevearc/conform.nvim",
-		lazy = false,
-		keys = {
-			{
-				"<leader>cf",
-				function()
-					require("conform").format({ async = true, lsp_fallback = true })
-				end,
-				mode = "",
-				desc = "[F]ormat buffer",
-			},
-		},
-		opts = {
-			notify_on_error = false,
-			format_on_save = function(bufnr)
-				local disable_filetypes = { c = true, cpp = true }
-				return {
-					timeout_ms = 500,
-					lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-				}
-			end,
-			formatters_by_ft = {
-				lua = { "stylua" },
-				dart = { "dart_format" },
-				-- Conform can also run multiple formatters sequentially
-				-- python = { "isort", "black" },
-				--
-				-- You can use a sub-list to tell conform to run *until* a formatter
-				-- is found.
-				-- javascript = { { "prettierd", "prettier" } },
-			},
-		},
-	},
-
-	{ -- Autocompletion
-		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
-		dependencies = {
-			-- Snippet Engine & its associated nvim-cmp source
-			{
-				"L3MON4D3/LuaSnip",
-				build = (function()
-					if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-						return
-					end
-					return "make install_jsregexp"
-				end)(),
-				dependencies = {
-					{
-						"rafamadriz/friendly-snippets",
-						config = function()
-							require("luasnip.loaders.from_vscode").lazy_load()
-						end,
-					},
-				},
-			},
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
-		},
-		config = function()
-			local cmp = require("cmp")
-			local luasnip = require("luasnip")
-			luasnip.config.setup({})
-			require("luasnip.loaders.from_vscode").load({ paths = "~/.config/nvim/snippets" })
-
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
-					end,
-				},
-				completion = { completeopt = "menu,menuone,noinsert" },
-
-				mapping = cmp.mapping.preset.insert({
-					-- Select the [n]ext item
-					["<C-n>"] = cmp.mapping.select_next_item(),
-					-- Select the [p]revious item
-					["<C-p>"] = cmp.mapping.select_prev_item(),
-
-					-- Scroll the documentation window [b]ack / [f]orward
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-
-					-- Accept ([y]es) the completion.
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
-
-					-- If you prefer more traditional completion keymaps,
-					-- you can uncomment the following lines
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					--['<Tab>'] = cmp.mapping.select_next_item(),
-					--['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
-					-- Manually trigger a completion from nvim-cmp.
-					["<C-Space>"] = cmp.mapping.complete({}),
-
-					-- <c-l> will move you to the right of each of the expansion locations.
-					-- <c-h> is similar, except moving you backwards.
-					["<C-l>"] = cmp.mapping(function()
-						if luasnip.expand_or_locally_jumpable() then
-							luasnip.expand_or_jump()
-						end
-					end, { "i", "s" }),
-					["<C-h>"] = cmp.mapping(function()
-						if luasnip.locally_jumpable(-1) then
-							luasnip.jump(-1)
-						end
-					end, { "i", "s" }),
-
-					-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-					--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-				}),
-				sources = {
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "path" },
-				},
-			})
-		end,
-	},
+	-- Formatting
+	require("henry.plugins.lsp.conform"),
+	-- Autocomplete
+	require("henry.plugins.lsp.autocomplete"),
+	-- Linting
+	require("henry.plugins.lsp.linting"),
 }

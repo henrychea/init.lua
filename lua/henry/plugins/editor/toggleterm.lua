@@ -1,5 +1,4 @@
 return {
-	-- Toggleterm
 	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
@@ -73,57 +72,6 @@ return {
 				{ noremap = true, silent = true, desc = "Lazy[G]it" }
 			)
 			require("toggleterm").setup({})
-		end,
-	},
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
-		-- use opts = {} for passing setup options
-		-- this is equalent to setup({}) function
-	},
-	-- Undo history
-	{
-		"mbbill/undotree",
-		config = function()
-			-- UndoTree
-			vim.keymap.set(
-				"n",
-				"<leader>uu",
-				"<cmd>UndotreeToggle<CR>",
-				{ noremap = true, silent = true, desc = "Toggle [U]ndoTree" }
-			)
-		end,
-	},
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		version = "*",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-		},
-		cmd = "Neotree",
-		keys = {
-			{ "\\", ":Neotree reveal<CR>", { desc = "NeoTree reveal" } },
-		},
-		opts = {
-			filesystem = {
-				window = {
-					mappings = {
-						["\\"] = "close_window",
-					},
-				},
-			},
-		},
-	},
-	{
-		"s1n7ax/nvim-window-picker",
-		name = "window-picker",
-		event = "VeryLazy",
-		version = "2.*",
-		config = function()
-			require("window-picker").setup()
 		end,
 	},
 }

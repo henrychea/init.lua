@@ -6,15 +6,8 @@ require("lazy").setup({
 	-- Toggle term, undo tree
 	require("henry.plugins.editor"),
 
-	require("henry.plugins.treesitter"),
-
+	-- LSP settings
 	require("henry.plugins.lsp"),
-
-	require("henry.plugins.telescope"),
-
-	require("henry.plugins.colorscheme"),
-
-	require("henry.plugins.whichkey"),
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
