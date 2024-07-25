@@ -1,3 +1,4 @@
+local tsjsFormatter = { { "prettier", "vtsls" } }
 return {
 	{ -- Autoformat
 		"stevearc/conform.nvim",
@@ -34,8 +35,10 @@ return {
 				-- You can use a sub-list to tell conform to run *until* a formatter
 				-- is found.
 				json = { { "prettier" } },
-				javascript = { { "prettier", "vtsls" } },
-				typescript = { { "prettier", "vtsls" } },
+				javascript = tsjsFormatter,
+				typescript = tsjsFormatter,
+				javascriptreact = tsjsFormatter,
+				typescriptreact = tsjsFormatter,
 			},
 		},
 	},

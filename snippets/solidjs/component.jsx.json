@@ -1,9 +1,0 @@
-{
-  "Solid Functional Component": {
-    "prefix": "scomp",
-    "body": [
-      "\n function ${1:${TM_FILENAME_BASE}}() {\n\n\treturn (\n\t\t<div>${1:${TM_FILENAME_BASE}}</div>\n\t);\n}\n\texport default ${1:${TM_FILENAME_BASE}};"
-    ],
-    "description": "Base for an empty solidJS component"
-  }
-}
