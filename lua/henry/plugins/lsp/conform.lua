@@ -1,8 +1,15 @@
-local tsjsFormatter = { { "prettier", "vtsls" } }
+local tsjsFormatter = { { "biome", "prettier", "vtsls" } }
 return {
 	{ -- Autoformat
 		"stevearc/conform.nvim",
-		lazy = false,
+		dependencies = {
+			{
+				"zapling/mason-conform.nvim",
+				opts = {},
+				event = "BufEnter",
+			},
+		},
+		event = "BufEnter",
 		keys = {
 			{
 				"<leader>cf",
@@ -14,27 +21,30 @@ return {
 			},
 		},
 		opts = {
-			notify_on_error = false,
+			notify_on_error = true,
 			format_on_save = function(bufnr)
 				-- Disable with a global or buffer-local variable
 				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 					return
 				end
-				local disable_filetypes = { c = true, cpp = true }
+				local disable_filetypes = { c = true, cpp = true, env = true }
 				return {
 					timeout_ms = 500,
 					lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
 				}
 			end,
+			formatters = {
+				prettier = {
+					require_cwd = true,
+				},
+				biome = {
+					require_cwd = true,
+				},
+			},
 			formatters_by_ft = {
 				lua = { "stylua" },
 				dart = { "dart_format" },
-				-- Conform can also run multiple formatters sequentially
-				-- python = { "isort", "black" },
-				--
-				-- You can use a sub-list to tell conform to run *until* a formatter
-				-- is found.
-				json = { { "prettier" } },
+				json = { { "biome", "prettier" } },
 				javascript = tsjsFormatter,
 				typescript = tsjsFormatter,
 				javascriptreact = tsjsFormatter,

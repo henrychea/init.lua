@@ -5,7 +5,16 @@ return {
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			{ "j-hui/fidget.nvim", opts = {} },
+			{
+				"j-hui/fidget.nvim",
+				opts = {
+					notification = {
+						window = {
+							winblend = 0,
+						},
+					},
+				},
+			},
 			-- make life easy with vtsls
 			{
 				"yioneko/nvim-vtsls",
@@ -26,7 +35,7 @@ return {
 				"n",
 				"<leader>cL",
 				":LspRestart<CR>",
-				{ noremap = true, silent = true, desc = "[C]ode Restart [L]SP" }
+				{ noremap = true, silent = true, desc = "LSP: [C]ode Restart [L]SP" }
 			)
 
 			local getIsFormatEnabledText = function(prefix, buf)
