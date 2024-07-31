@@ -1,4 +1,4 @@
-local tsjsFormatter = { { "biome", "prettier", "vtsls" } }
+local tsjsFormatter = { "biome", "prettier", "vtsls" }
 return {
 	{ -- Autoformat
 		"stevearc/conform.nvim",
@@ -44,7 +44,7 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				dart = { "dart_format" },
-				json = { { "biome", "prettier" } },
+				json = { "biome", "prettier" },
 				javascript = tsjsFormatter,
 				typescript = tsjsFormatter,
 				javascriptreact = tsjsFormatter,

@@ -27,6 +27,7 @@ local function copy_path(state)
 			local i = tonumber(choice:sub(1, 1))
 			if i then
 				local result = results[i]
+				vim.fn.setreg("+", result)
 				vim.fn.setreg('"', result)
 				vim.notify("Copied: " .. result)
 			else
@@ -61,6 +62,11 @@ return {
 		},
 		opts = {
 			filesystem = {
+				follow_current_file = {
+					enabled = true, -- This will find and focus the file in the active buffer every time
+					--               -- the current file is changed while the tree is open.
+					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+				},
 				window = {
 					mappings = {
 						["\\"] = "close_window",

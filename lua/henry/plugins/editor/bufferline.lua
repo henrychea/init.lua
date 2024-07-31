@@ -26,14 +26,12 @@ return {
 		},
 		keys = {
 			-- Buffer navigation.
-			{ "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous buffer" },
-			{ "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
 			{ "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous buffer" },
 			{ "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
 			{ "<leader>bc", "<cmd>BufferLinePickClose<cr>", desc = "Select a buffer to close" },
 			{ "<leader>bl", "<cmd>BufferLineCloseLeft<cr>", desc = "Close buffers to the left" },
-			{ "<leader>bo", "<cmd>BufferLinePick<cr>", desc = "Select a buffer to open" },
 			{ "<leader>br", "<cmd>BufferLineCloseRight<cr>", desc = "Close buffers to the right" },
+			{ "<leader>bd", "<cmd>bdelete<cr>", desc = "Close current buffer" },
 		},
 		config = function(_, opts)
 			require("bufferline").setup(opts)
