@@ -3,6 +3,7 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+			{ "folke/neoconf.nvim" },
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{
@@ -18,14 +19,7 @@ return {
 			-- make life easy with vtsls
 			{
 				"yioneko/nvim-vtsls",
-				config = function()
-					local map = function(keys, func, desc)
-						vim.keymap.set("n", keys, func, { desc = "LSP: " .. desc })
-					end
-					-- Execute a code action, usually your cursor needs to be on top of an error
-					-- or a suggestion from your LSP for this to activate.
-					map("<leader>cA", "<cmd>VtsExec source_actions<CR>", "Source [C]ode [A]ctions")
-				end,
+				config = function() end,
 			},
 			{ "folke/neodev.nvim", opts = {} },
 		},
@@ -166,9 +160,6 @@ return {
 									},
 								},
 							},
-							lens = {
-								enable = true,
-							},
 						},
 					},
 				},
@@ -241,7 +232,9 @@ return {
 			})
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
+			require("neoconf").setup({
+				-- override any of the default settings here
+			})
 			require("mason-lspconfig").setup({
 				handlers = {
 					function(server_name)

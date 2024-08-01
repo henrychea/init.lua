@@ -40,11 +40,14 @@ return {
 				biome = {
 					require_cwd = true,
 				},
+				shfmt = {},
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
 				dart = { "dart_format" },
 				json = { "biome", "prettier" },
+				rust = { lsp_format = "fallback" },
+				sh = { "shfmt" },
 				javascript = tsjsFormatter,
 				typescript = tsjsFormatter,
 				javascriptreact = tsjsFormatter,
