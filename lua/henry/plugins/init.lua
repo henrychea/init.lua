@@ -8,6 +8,9 @@ require("lazy").setup({
 
 	-- LSP settings
 	require("henry.plugins.lsp"),
+
+	-- Git settings
+	require("henry.plugins.git"),
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the

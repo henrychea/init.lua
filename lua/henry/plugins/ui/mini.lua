@@ -18,7 +18,10 @@ return {
 			require("mini.surround").setup()
 
 			-- Replace nvim buffer removal prcoess
-			require("mini.bufremove").setup()
+			require("mini.surround").setup()
+
+			-- Pairs
+			require("mini.pairs").setup()
 
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,

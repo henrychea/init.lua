@@ -41,6 +41,12 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 -- Hide cmd line
 vim.opt.cmdheight = 1
+
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+vim.opt.foldlevel = 99
+vim.opt.foldmethod = "expr"
+
 -- Set shell to PowerShell 7 if on Win32 or Win64
 if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
 	vim.opt.fileformat = "unix"

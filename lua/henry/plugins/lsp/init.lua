@@ -24,14 +24,6 @@ return {
 			{ "folke/neodev.nvim", opts = {} },
 		},
 		config = function()
-			-- Restart LSP Server
-			vim.keymap.set(
-				"n",
-				"<leader>cL",
-				":LspRestart<CR>",
-				{ noremap = true, silent = true, desc = "LSP: [C]ode Restart [L]SP" }
-			)
-
 			local getIsFormatEnabledText = function(prefix, buf)
 				if buf then
 					local text = vim.b[buf].disable_autoformat and "Disabled" or "Enabled"

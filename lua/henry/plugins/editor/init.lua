@@ -11,13 +11,8 @@ return {
 	require("henry.plugins.editor.whichkey"),
 	-- Toggleterm
 	require("henry.plugins.editor.toggleterm"),
-	-- autopairs
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		opts = {},
-		-- this is equalent to setup({}) function
-	},
+	-- Workspace diagnostics
+	require("henry.plugins.editor.trouble"),
 	-- Undo history
 	{
 		"mbbill/undotree",

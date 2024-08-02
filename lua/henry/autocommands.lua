@@ -26,12 +26,16 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 		local map = function(keys, func, desc)
 			vim.keymap.set("n", keys, func, { desc = "LSP: " .. desc })
 		end
+
+		-- Restart LSP Server
+		map("<leader>cL", ":LspRestart<CR>", "[C]ode Restart [L]SP")
 		-- Execute a code action, usually your cursor needs to be on top of an error
 		-- or a suggestion from your LSP for this to activate.
 		local clients = vim.lsp.get_clients()
 		for _, client in pairs(clients) do
 			if string.find(client.name, "vtsls") then
 				map("<leader>cA", "<cmd>VtsExec source_actions<CR>", "Source [C]ode [A]ctions")
+				map("<leader>cvt", "<cmd>VtsExec restart_tsserver<CR>", "[C]ode Restart Tsserver")
 			end
 		end
 	end,
